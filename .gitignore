@@ -1,6 +1,6 @@
 node_modules
 .env
-.account.txt
+account.txt
 coverage
 coverage.json
 typechain
