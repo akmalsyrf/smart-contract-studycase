@@ -37,21 +37,21 @@
   let provider;
 
   let account;
-  let ytContract;
+  let tryContract;
 
   async function loadData(){
-    document.getElementById("pemilik").innerText = await ytContract.getPemilik() 
-    document.getElementById("rawText").innerText = await ytContract.textRaw()
-    document.getElementById("angka").innerText = await ytContract.angka()
+    document.getElementById("pemilik").innerText = await tryContract.getOwner() 
+    document.getElementById("rawText").innerText = await tryContract.textRaw()
+    document.getElementById("angka").innerText = await tryContract.angka()
   }
   async function setText() {
     const textValue = document.getElementById("textRaw").value
-    const yt = await ytContract.connect(await provider.getSigner())
+    const yt = await tryContract.connect(await provider.getSigner())
     await yt.setText(textValue)
     await loadData()
   }
   async function inc() {
-    const yt = await ytContract.connect(await provider.getSigner())
+    const yt = await tryContract.connect(await provider.getSigner())
     await yt.inc()
     await loadData()
   }
@@ -61,7 +61,7 @@
     account = await provider.getSigner().getAddress()
     document.getElementById("welcome").innerText += account
     document.getElementById("wallet").classList.add("invisible");
-    ytContract = new ethers.Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", abi, provider)
+    tryContract = new ethers.Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", abi, provider)
     await loadData()
   }
   window.addEventListener('load', async () => {
